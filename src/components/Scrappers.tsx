@@ -69,11 +69,11 @@ const Scrappers = () => {
       </div>
 
       {/* Offers display */}
-      <div className="grid place-items-center w-screen">
+      <div className="grid place-items-center">
         {isLoading && <p>Ładowanie...</p>}
 
         {data?.offers && data?.offers?.length > 0 && (
-          <div className="w-auto md:w-2/3 mx-4">
+          <div className="w-auto md:w-2/3">
             <h3 className="text-xl font-bold place-self-start mb-1">
               {data?.title}
             </h3>
