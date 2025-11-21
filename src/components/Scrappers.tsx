@@ -73,11 +73,11 @@ const Scrappers = () => {
         {isLoading && <p>Ładowanie...</p>}
 
         {data?.offers && data?.offers?.length > 0 && (
-          <div className="w-2/3">
+          <div className="w-auto md:w-2/3 mx-4">
             <h3 className="text-xl font-bold place-self-start mb-1">
               {data?.title}
             </h3>
-            <ul className="grid grid-cols-3 w-full gap-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-3 w-full gap-4">
               {data?.offers.map((offer) => (
                 <li
                   key={offer.id}
