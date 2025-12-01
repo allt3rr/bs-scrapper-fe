@@ -38,7 +38,7 @@ const Scrappers = () => {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_FETCH_ADDRESS}/data?provider=${provider}`,
+        `${process.env.NEXT_PUBLIC_FETCH_ADDRESS}/scrapper?provider=${provider}`,
         {
           method: "GET",
           headers: {
