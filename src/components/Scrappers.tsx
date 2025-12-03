@@ -29,23 +29,28 @@ type DataType = {
 const Scrappers = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<DataType>(null);
+  const [backend, setBackend] = useState<string | null>(null);
 
+  const backendAddress = {
+    TypeScript: process.env.NEXT_PUBLIC_FETCH_ADDRESS_TS,
+    Python: process.env.NEXT_PUBLIC_FETCH_ADDRESS_PYTHON,
+  };
   const services = [{ name: "olx" }];
 
   const handleClick = async (provider: string) => {
+    console.log("provider: ", provider);
+    if (!backend) return;
+
     setIsLoading(true);
     setData(null);
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_FETCH_ADDRESS}/scrapper?provider=${provider}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await fetch(`${backend}/scrapper?provider=${provider}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!res.ok) {
         throw new Error(`Response error: ${res.status}`);
@@ -62,7 +67,24 @@ const Scrappers = () => {
 
   return (
     <div>
-      {/* Services buttons */}
+      {/* Backend buttons */}
+      <p className="text-lg">Wybierz poniższy backend:</p>
+      <div className="flex items-center justify-center gap-4 my-3">
+        {Object.entries(backendAddress).map(([key, value]) => (
+          <Button
+            key={key}
+            size={"lg"}
+            variant={backend === value ? "default" : "outline"}
+            className={`cursor-pointer`}
+            onClick={() => {
+              setBackend(value as string);
+            }}
+          >
+            {key as string}
+          </Button>
+        ))}
+      </div>
+      <p className="text-lg">Wybierz poniższy serwis do przejrzenia ofert:</p>
       <div className="flex items-center justify-center gap-4 my-3">
         {services.map((service, index) => (
           <Button
@@ -70,6 +92,7 @@ const Scrappers = () => {
             size={"lg"}
             variant={"outline"}
             className="cursor-pointer uppercase"
+            disabled={!backend}
             onClick={() => handleClick(service.name)}
           >
             {service.name}
