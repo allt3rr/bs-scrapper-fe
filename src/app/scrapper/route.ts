@@ -1,4 +1,4 @@
-import { olxScrap } from "@/lib/olx_scrap";
+import { olxScrap } from "@/data/olx_scrap";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
