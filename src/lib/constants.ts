@@ -11,15 +11,18 @@ export const backendAddress = [
 
 export const services = [{ name: "olx" }];
 
-export const types = [
-  { name: "Zlecenia dla studentów" },
-  { name: "Praca zdalna" },
-  { name: "Praca na pełen etat" },
+export const typesOLX = [
+  { name: "Zlecenia dla studentów", url: "student_status" },
+  { name: "Praca zdalna", url: "remote_work_possibility" },
+  { name: "Praca na pełen etat", url: "fulltime" },
+  { name: "Praca na niepełen etat", url: "parttime" },
+  { name: "Praca dodatkowa", url: "haltime" },
+  { name: "Praca sezonowa", url: "seasonal" },
 ];
 
-export const citites = [
-  { name: "Warszawa" },
-  { name: "Kraków" },
-  { name: "Zawiercie" },
-  { name: "Katowice" },
+export const cititesOLX = [
+  { name: "warszawa" },
+  { name: "kraków" },
+  { name: "zawiercie" },
+  { name: "katowice" },
 ];

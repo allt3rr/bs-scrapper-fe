@@ -1,9 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-import { backendAddress, citites, services, types } from "@/lib/constants";
+import {
+  backendAddress,
+  cititesOLX,
+  services,
+  typesOLX,
+} from "@/lib/constants";
 import ResultBox from "./ResultBox";
 import { DataType } from "@/types/offerData";
 
@@ -30,13 +35,20 @@ const Scrappers = () => {
   const [data, setData] = useState<DataType>(null);
 
   const fetchData = async () => {
-    if (!backend || !provider || !type) return;
+    if (!backend || !provider || !type || !city) return;
 
     setIsLoading(true);
     setData(null);
 
     try {
-      const res = await fetch(`${backend}/scrapper?provider=${provider}`, {
+      const params = new URLSearchParams();
+      params.append("provider", provider);
+      params.append("type", type);
+      params.append("city", city);
+
+      const url = `${backend}/scrapper?${params.toString()}`;
+
+      const res = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -110,8 +122,8 @@ const Scrappers = () => {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Typ pracy</SelectLabel>
-                  {types.map((type, index) => (
-                    <SelectItem key={index} value={type.name}>
+                  {typesOLX.map((type, index) => (
+                    <SelectItem key={index} value={type.url}>
                       {type.name}
                     </SelectItem>
                   ))}
@@ -133,9 +145,9 @@ const Scrappers = () => {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Miasta</SelectLabel>
-                  {citites.map((city, index) => (
+                  {cititesOLX.map((city, index) => (
                     <SelectItem key={index} value={city.name}>
-                      {city.name}
+                      {city.name[0].toUpperCase() + city.name.substring(1)}
                     </SelectItem>
                   ))}
                 </SelectGroup>
