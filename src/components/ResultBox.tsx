@@ -23,7 +23,7 @@ const ResultBox = ({
       {data?.offers && data?.offers?.length > 0 && (
         <div className="w-auto md:w-2/3">
           <h3 className="text-xl font-bold place-self-start mb-1">
-            {data?.title}
+            Znaleziono {data?.title}: {data.count}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 w-full gap-4">
             {data?.offers.map((offer) => (

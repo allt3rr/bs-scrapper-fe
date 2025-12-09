@@ -10,5 +10,6 @@ export type Offer = {
 
 export type DataType = {
   title: string;
+  count: string;
   offers: Offer[];
 } | null;
