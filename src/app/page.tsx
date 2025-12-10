@@ -24,6 +24,15 @@ export default function Home() {
           onClick: () => console.log("Agreed"),
         },
       });
+      toast.warning("UWAGA!", {
+        description:
+          "Wyszukiwanie przy użyciu backend'u TypeScript działa sprawniej ze względu na hosting oraz lepszej jakości kod!",
+        duration: toastDisplayDuration,
+        action: {
+          label: "OK",
+          onClick: () => console.log("Agreed"),
+        },
+      });
     }, delayBeforeToast);
 
     return () => {
